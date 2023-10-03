@@ -44,11 +44,6 @@ namespace bebra
 
         public void Move(int speed)
         {
-            if (speed <= 0)
-            {
-                Console.WriteLine("Скорость должна быть больше нуля.");
-                return;
-            }
 
             Console.Write("Введите расстояние: ");
             double distance = double.Parse(Console.ReadLine());
@@ -73,7 +68,8 @@ namespace bebra
                 distance1 = ost * kmNalitr;
                 probeg += distance1;
                 ost = 0;
-                Console.WriteLine($"Проехано {distance1:F2} км со скоростью {this.speed}. Топливо закончилось.\nОбщий пробег: {probeg:F2}");
+                Console.WriteLine($"Проехано {distance1:F2} км со скоростью {this.speed}. Топливо закончилось. Автомобиль остановлен\nОбщий пробег: {probeg:F2}");
+                speed = 0;
                 this.speed = 0;
             }
             else if (ost == 0)
