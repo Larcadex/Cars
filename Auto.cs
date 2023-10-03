@@ -59,7 +59,7 @@ namespace bebra
 
 
 
-            if (ost >= rashod && ost != 0)
+            if (ost >= rashod && ost != 0 && speed != 0)
             {
                 ost -= rashod;
                 probeg += distance;
@@ -67,18 +67,22 @@ namespace bebra
                 this.speed = speed;
                 
             }
-            else if (ost <= rashod && ost != 0)
+            else if (ost <= rashod && ost != 0 && speed != 0)
             {
                 double distance1;
                 distance1 = ost * kmNalitr;
                 probeg += distance1;
                 ost = 0;
                 Console.WriteLine($"Проехано {distance1:F2} км со скоростью {this.speed}. Топливо закончилось.\nОбщий пробег: {probeg:F2}");
-                this.speed = speed;
+                this.speed = 0;
             }
-            else
+            else if (ost == 0)
             {
                 Console.WriteLine("Недостаточно топлива для поездки.");
+            }
+            else if (speed == 0)
+            {
+                Console.WriteLine("Недостаточно скорости для поездки.");
             }
         }
 
