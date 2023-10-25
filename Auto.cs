@@ -4,12 +4,12 @@ namespace bebra
 {
     class auto
     {
-        private string nom;
-        private double bak;
-        private double ras;
-        private int speed;
-        private double probeg;
-        private double x;
+        protected string nom;
+        protected double bak;
+        protected double ras;
+        protected int speed;
+        protected double probeg;
+        protected double x;
 
         public auto(string initialNom, double initialFuel, double initialRas, int initialSpeed, double initiialProbeg, double initialx)
         {
@@ -41,7 +41,7 @@ namespace bebra
             return x;
         }
 
-        public void Out()
+        public virtual void Out()
         {
             Console.WriteLine($"Номер авто: {nom}");
             Console.WriteLine($"Количество бензина в баке: {bak} л");
