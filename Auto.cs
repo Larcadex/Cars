@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace bebra
+namespace cars
 {
     class auto
     {
@@ -10,33 +10,19 @@ namespace bebra
         protected int speed;
         protected double probeg;
         protected double x;
+        protected double time;
 
-        public auto(string initialNom, double initialFuel, double initialRas, int initialSpeed, double initiialProbeg, double initialx)
+        public auto(string nom, double bak, double ras, int speed, double probeg, double x)
         {
-            this.bak = initialFuel;
-            this.speed = initialSpeed;
-            this.nom = initialNom;
-            this.ras = initialRas;
-            this.probeg = initiialProbeg;
-            this.x = initialx;
-        }
-
-        public void Info(string nom, double bak, double ras, int speed, double probeg, double x)
-        {
-            this.nom = nom;
             this.bak = bak;
-            this.ras = ras;
             this.speed = speed;
+            this.nom = nom;
+            this.ras = ras;
             this.probeg = probeg;
             this.x = x;
         }
-
-        public string GetNom()
-        {
-            return nom;
-        }
-
-        public double GetX()
+        
+        public double get_x()
         {
             return x;
         }
@@ -50,15 +36,15 @@ namespace bebra
             Console.WriteLine($"Пробег: {probeg:F2} км");
         }
 
-        public void Zapravka(double top)
+        public void zapravka(double top)
         {
             bak += top;
             Console.WriteLine($"\nБак заправлен, в баке находится: {bak}");
         }
 
-        public void Move(double distance, int direction)
+        public void move(double distance, int direction)
         {
-            double kmNalitr = 100 / ras;
+            double km_on_lit = 100 / ras;
             double rashod = Math.Abs(distance) * (ras / 100);
 
             if (speed == 0)
@@ -72,26 +58,28 @@ namespace bebra
                     bak -= rashod;
                     probeg += Math.Abs(distance);
                     x += direction * Math.Abs(distance);
-                    Console.WriteLine($"\nПроехано {Math.Abs(distance):F2} км со скоростью {speed}. Остаток топлива: {bak:F2}\nОбщий пробег: {probeg:F2}");
+                    time = Math.Abs(distance) / speed;
+                    Console.WriteLine($"\nПроехано {Math.Abs(distance):F2} км со скоростью {speed} за {time:F2} ч. Остаток топлива: {bak:F2}\nОбщий пробег: {probeg:F2}");
                 }
                 else
                 {
-                    double distance1 = bak * kmNalitr;
+                    double distance1 = bak * km_on_lit;
                     probeg += distance1;
                     bak = 0;
                     x += direction * distance1;
-                    Console.WriteLine($"\nПроехано {distance1:F2} км со скоростью {speed}. Топливо закончилось. Автомобиль остановлен\nОбщий пробег: {probeg:F2}");
+                    time = Math.Abs(distance1) / speed;
+                    Console.WriteLine($"\nПроехано {distance1:F2} км со скоростью {speed} за {time:F2} ч. Топливо закончилось. Автомобиль остановлен\nОбщий пробег: {probeg:F2}");
                     speed = 0;
                 }
             }
         }
 
-        public void Ostanovka()
+        public void ostanovka()
         {
             speed = 0;
         }
 
-        public void Razgon(int sum_speed)
+        public void razgon(int sum_speed)
         {
             if (bak >= 1.0)
             {
@@ -105,17 +93,16 @@ namespace bebra
             }
         }
 
-        public void Tormoz(int sum_speed1)
+        public void stop(int sum_speed)
         {
-            speed -= sum_speed1;
+            speed -= sum_speed;
             ras -= 0.1;
             Console.WriteLine($"\nАвтомобиль замедляется до скорости {speed} км/ч. Расход топлива уменьшен.");
         }
 
-        public double CheckCollision(auto otherCar)
+        public double check_collision(auto other_car)
         {
-            double distanceBetweenCars = otherCar.x - x;
-            return distanceBetweenCars;
+            return other_car.x - x;
         }
 
     }

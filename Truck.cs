@@ -1,33 +1,57 @@
 using System;
 
-namespace bebra
+namespace cars
 {
     class Truck : auto
     {
         private double weight;
 
-        public Truck(string initialNom, double initialFuel, double initialRas, int initialSpeed, double initialProbeg,
-            double initialX, double initialWeight) :
-            base(initialNom, initialFuel, initialRas, initialSpeed, initialProbeg, initialX)
+        public Truck(string nom, double bak, double ras, int speed, double probeg, double x, double weight) : base(nom, bak, ras, speed, probeg, x)
         {
-            this.weight = initialWeight;
+            this.weight = weight;
         }
 
         public override void Out()
         {
             base.Out();
-            Console.WriteLine($"Груз в грузовике: {weight} .");
+            Console.WriteLine($"Груз в грузовике: {weight} т.");
         }
 
-        public void AddCargo(double numberWeight)
+        public void add_weight(double num_weight)
         {
-            if (numberWeight > 0)
+            if (num_weight > 0)
             {
-                if (weight + numberWeight <= 50)
+                if (weight + num_weight <= 50)
                 {
-                    weight += numberWeight;
-                    UpdateParameters();
-                    Console.WriteLine($"Добавлен груз: {numberWeight}. Всего груза: {weight}1000.");
+                    weight += num_weight;
+                    if (weight < 10)
+                    {
+                        speed -= 2;
+                        ras += 0.2;
+                    }
+                    else if (weight >= 10 && weight < 20)
+                    {
+                        speed -= 3;
+                        ras += 0.3;
+                    }
+                    else if (weight >= 20 && weight < 30)
+                    {
+                        speed -= 4;
+                        ras += 0.4;
+                    }
+                    else if (weight >= 30 && weight < 40)
+                    {
+                        speed -= 5;
+                        ras += 0.5;
+                    }
+                    else if (weight >= 40 && weight <= 50)
+                    {
+                        speed -= 6;
+                        ras += 0.6;
+                    }
+
+                   
+                    Console.WriteLine($"Добавлен груз: {num_weight} т. Всего груза: {weight} т. Скорость и расход изменены.");
                 }
                 else
                 {
@@ -40,13 +64,38 @@ namespace bebra
             }
         }
 
-        public void RemoveCargo(double removedWeight)
+        public void remove_weight(double num_weight)
         {
-            if (removedWeight > 0 && removedWeight <= weight)
+            if (num_weight > 0 && num_weight <= weight)
             {
-                weight -= removedWeight;
-                UpdateParameters();
-                Console.WriteLine($"Выгружено груза: {removedWeight}. Всего груза: {weight}.");
+                weight -= num_weight;
+                if (weight < 10)
+                {
+                    speed += 6;
+                    ras -= 0.6;
+                }
+                else if (weight >= 10 && weight < 20)
+                {
+                    speed += 5;
+                    ras -= 0.5;
+                }
+                else if (weight >= 20 && weight < 30)
+                {
+                    speed += 4;
+                    ras -= 0.4;
+                }
+                else if (weight >= 30 && weight < 40)
+                {
+                    speed += 3;
+                    ras -= 0.3;
+                }
+                else if (weight >= 40 && weight <= 50)
+                {
+                    speed += 2;
+                    ras -= 0.2;
+                }
+
+                Console.WriteLine($"Выгружено груза: {num_weight} т. Всего груза: {weight} т. Скорость и расход изменены.");
             }
             else
             {
@@ -54,10 +103,6 @@ namespace bebra
             }
         }
 
-        private void UpdateParameters()
-        {
-            speed -= (int)(speed * 0.01 * weight);
-            ras += 0.1 * weight;
-        }
+
     }
 }
