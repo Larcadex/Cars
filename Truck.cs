@@ -111,7 +111,7 @@ namespace cars
                     zapravka(parameter);
                     break;
                 case "move":
-                    move(parameter, -1001); 
+                    move(parameter, -1); 
                     break;
                 case "ostanovka":
                     ostanovka();
