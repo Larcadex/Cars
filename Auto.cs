@@ -10,7 +10,7 @@ namespace cars
         protected int speed;
         protected double probeg;
         protected double x;
-        protected double time;
+        
 
         public auto(string nom, double bak, double ras, int speed, double probeg, double x)
         {
@@ -46,6 +46,7 @@ namespace cars
         {
             double km_on_lit = 100 / ras;
             double rashod = Math.Abs(distance) * (ras / 100);
+            double time = 0;
 
             if (speed == 0)
             {
