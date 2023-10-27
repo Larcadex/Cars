@@ -77,16 +77,15 @@ namespace cars
                         Console.Write("\nВведите желаемое расстояние: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        int direction = 1;
-                        bus.move(a, direction);
+                        bus.choise("move", a);
                         break;
 
                     case ConsoleKey.D2:
                         Console.Clear();
                         Console.Write("\nВВведите скорость для ускорения: ");
-                         b = int.Parse(Console.ReadLine());
+                        b = int.Parse(Console.ReadLine());
                         Console.Clear();
-                        bus.razgon(b);
+                        bus.choise("razgon", b);
                         break;
 
                     case ConsoleKey.D3:
@@ -94,13 +93,13 @@ namespace cars
                         Console.Write("\nВВведите скорость для замедления: ");
                         b = int.Parse(Console.ReadLine());
                         Console.Clear();
-                        bus.stop(b);
+                        bus.choise("stop", b);
                         break;
 
                     case ConsoleKey.D4:
                         Console.Clear();
                         Console.WriteLine("\nАвтомобиль остановлен.");
-                        bus.ostanovka();
+                        bus.choise("ostanovka", 0);
                         break;
 
                     case ConsoleKey.D5:
@@ -108,7 +107,7 @@ namespace cars
                         Console.Write("\nВВведите количество бензина для дозаправки: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        bus.zapravka(a);
+                        bus.choise("zapravka", a);
                         break;
 
                     case ConsoleKey.D6:
@@ -131,7 +130,7 @@ namespace cars
                         Console.Write("\nВВведите количество пассажиров: ");
                         c = byte.Parse(Console.ReadLine());
                         Console.Clear();
-                        bus.add_passanger(c);
+                        bus.choise("add_passanger", c);
                         break;
                     
                     case ConsoleKey.R:
@@ -139,7 +138,7 @@ namespace cars
                         Console.Write("\nВВведите количество пассажиров: ");
                         c = byte.Parse(Console.ReadLine());
                         Console.Clear();
-                        bus.remove_passanger(c);
+                        bus.choise("remove_passanger", c);
                         break;
                 }
                 
@@ -170,8 +169,7 @@ namespace cars
                         Console.Write("\nВведите желаемое расстояние: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        int direction = -1;
-                        truck.move(a, direction);
+                        truck.choise("move", a);
                         break;
 
                     case ConsoleKey.D2:
@@ -179,7 +177,7 @@ namespace cars
                         Console.Write("\nВВведите скорость для ускорения: ");
                         b = int.Parse(Console.ReadLine());
                         Console.Clear();
-                        truck.razgon(b);
+                        truck.choise("razgon", b);
                         break;
 
                     case ConsoleKey.D3:
@@ -187,13 +185,13 @@ namespace cars
                         Console.Write("\nВВведите скорость для замедления: ");
                         b = int.Parse(Console.ReadLine());
                         Console.Clear();
-                        truck.stop(b);
+                        truck.choise("stop", b);
                         break;
 
                     case ConsoleKey.D4:
                         Console.Clear();
                         Console.WriteLine("\nАвтомобиль остановлен.");
-                        truck.ostanovka();
+                        truck.choise("ostanovka", 0);
                         break;
 
                     case ConsoleKey.D5:
@@ -201,33 +199,38 @@ namespace cars
                         Console.Write("\nВВведите количество бензина для дозаправки: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        truck.zapravka(a);
+                        truck.choise("zapravka", a);
                         break;
 
                     case ConsoleKey.D6:
+                        Console.Clear();
+                        truck.Out();
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("\nВНеверный выбор. Повторите попытку.");
+                        break;
+
+                    case ConsoleKey.D7:
                         Console.Clear();
                         Console.WriteLine("\nВПрограмма завершена.");
                         return;
                     
                     case ConsoleKey.Q:
                         Console.Clear();
-                        Console.Write("\nВВведите вес груза: ");
+                        Console.Write("\nВВведите количество пассажиров: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        truck.add_weight(a);
+                        truck.choise("add_weight", a);
                         break;
                     
                     case ConsoleKey.R:
                         Console.Clear();
-                        Console.Write("\nВВведите вес груза: ");
+                        Console.Write("\nВВведите количество пассажиров: ");
                         a = double.Parse(Console.ReadLine());
                         Console.Clear();
-                        truck.remove_weight(a);
-                        break;
-                    
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("\nВНеверный выбор. Повторите попытку.");
+                        truck.choise("remove_weight", a);
                         break;
                 }
             

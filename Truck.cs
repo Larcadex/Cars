@@ -17,7 +17,7 @@ namespace cars
             Console.WriteLine($"Груз в грузовике: {weight} т.");
         }
 
-        public void add_weight(double num_weight)
+        private void add_weight(double num_weight)
         {
             if (num_weight > 0)
             {
@@ -64,7 +64,7 @@ namespace cars
             }
         }
 
-        public void remove_weight(double num_weight)
+        private void remove_weight(double num_weight)
         {
             if (num_weight > 0 && num_weight <= weight)
             {
@@ -100,6 +100,34 @@ namespace cars
             else
             {
                 Console.WriteLine("Вес груза для выгрузки должен быть положительным числом и не превышать текущий вес груза.");
+            }
+        }
+        
+        public void choise(string action, double parameter = 0)
+        {
+            switch (action.ToLower())
+            {
+                case "zapravka":
+                    zapravka(parameter);
+                    break;
+                case "move":
+                    move(parameter, -1); 
+                    break;
+                case "ostanovka":
+                    ostanovka();
+                    break;
+                case "razgon":
+                    razgon((int)parameter);
+                    break;
+                case "stop":
+                    stop((int)parameter);
+                    break;
+                case "add_weight":
+                    add_weight((byte)parameter);
+                    break;
+                case "remove_weight":
+                    remove_weight((byte)parameter);
+                    break;
             }
         }
 

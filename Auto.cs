@@ -21,6 +21,10 @@ namespace cars
             this.probeg = probeg;
             this.x = x;
         }
+        public double check_collision(auto other_car)
+        {
+            return other_car.x - x;
+        }
         
         public double get_x()
         {
@@ -36,13 +40,13 @@ namespace cars
             Console.WriteLine($"Пробег: {probeg:F2} км");
         }
 
-        public void zapravka(double top)
+        protected void zapravka(double top)
         {
             bak += top;
             Console.WriteLine($"\nБак заправлен, в баке находится: {bak}");
         }
 
-        public void move(double distance, int direction)
+        protected void move(double distance, int direction)
         {
             double km_on_lit = 100 / ras;
             double rashod = Math.Abs(distance) * (ras / 100);
@@ -70,17 +74,30 @@ namespace cars
                     x += direction * distance1;
                     time = Math.Abs(distance1) / speed;
                     Console.WriteLine($"\nПроехано {distance1:F2} км со скоростью {speed} за {time:F2} ч. Топливо закончилось. Автомобиль остановлен\nОбщий пробег: {probeg:F2}");
-                    speed = 0;
+                    Console.Write("Желаете дозаправить машину?:\n1. Да\n2. Нет ");
+                    
+                    ConsoleKeyInfo keyInfo3 = Console.ReadKey(true);
+                    
+                    if (keyInfo3.Key == ConsoleKey.D1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Введите количество топлива для дозаправки: ");
+                        double topUpAmount = double.Parse(Console.ReadLine());
+                        zapravka(topUpAmount);
+                        Console.Clear();
+                        Console.WriteLine($"Машина дозаправлена на {topUpAmount:F2} л.");
+                        move(distance - distance1, direction);
+                    }
                 }
             }
         }
 
-        public void ostanovka()
+        protected void ostanovka()
         {
             speed = 0;
         }
 
-        public void razgon(int sum_speed)
+        protected void razgon(int sum_speed)
         {
             if (bak >= 1.0)
             {
@@ -94,16 +111,11 @@ namespace cars
             }
         }
 
-        public void stop(int sum_speed)
+        protected void stop(int sum_speed)
         {
             speed -= sum_speed;
             ras -= 0.1;
             Console.WriteLine($"\nАвтомобиль замедляется до скорости {speed} км/ч. Расход топлива уменьшен.");
-        }
-
-        public double check_collision(auto other_car)
-        {
-            return other_car.x - x;
         }
 
     }
