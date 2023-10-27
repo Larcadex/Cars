@@ -42,9 +42,20 @@ namespace cars
 
         protected void zapravka(double top)
         {
-            bak += top;
-            Console.WriteLine($"\nБак заправлен, в баке находится: {bak}");
+            if (bak + top <= 150)
+            {
+                bak += top;
+                Console.WriteLine($"\nБак заправлен, в баке находится: {bak}");
+            }
+            else
+            {
+                bak = 150;
+                Console.WriteLine($"\nБак заправлен, но объем бака превышает 150 литров. Бак заполнен до максимума: {bak}");
+            }
+
+           
         }
+
 
         protected void move(double distance, int direction)
         {
@@ -101,9 +112,20 @@ namespace cars
         {
             if (bak >= 1.0)
             {
-                speed += sum_speed;
-                ras += 0.1;
-                Console.WriteLine($"\nАвтомобиль разгоняется до скорости {speed} км/ч. Расход топлива увеличен.");
+                int max_speed = 200;
+
+                if (speed + sum_speed <= max_speed)
+                {
+                    speed += sum_speed;
+                    ras += 0.1;
+                    Console.WriteLine($"\nАвтомобиль разгоняется до скорости {speed}. Расход топлива увеличен.");
+                }
+                else
+                {
+                    speed = max_speed;
+                    ras += 0.1;
+                    Console.WriteLine($"\nДостигнута максимальная скорость {max_speed}. Невозможно увеличить скорость.");
+                }
             }
             else
             {
